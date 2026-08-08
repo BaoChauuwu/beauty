@@ -54,10 +54,11 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
             </div>
 
             <div style={{ minWidth: 0, flexShrink: 1 }}>
-              <div className="navbar-logo-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--primary-dark)', lineHeight: 1.15, whiteSpace: 'nowrap' }}>
-                Dermacare - Đặt Lịch Khám
+              <div className="navbar-logo-title" style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--primary-dark)', lineHeight: 1.2, whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.15rem' }}>Dermacare</span>
+                <span style={{ color: 'var(--primary-emerald)', fontSize: '0.88rem', fontWeight: 700 }}>• Đặt Lịch Khám</span>
               </div>
-              <div style={{ fontSize: '0.62rem', color: 'var(--primary-emerald)', fontWeight: 700, letterSpacing: '0.4px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: '0.64rem', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
                 BS. Đỗ Nguyễn Quỳnh Ngân
               </div>
             </div>
