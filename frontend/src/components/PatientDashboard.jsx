@@ -60,22 +60,22 @@ export const PatientDashboard = ({ onOpenBooking }) => {
   };
 
   return (
-    <section className="container" style={{ padding: '60px 20px' }}>
-      <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '32px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
+    <section className="container" style={{ padding: '40px 16px' }}>
+      <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '24px 16px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             {user ? (
               <>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
                   <span className="badge-emerald" style={{ fontSize: '0.78rem' }}>🟢 Đã Tự Động Đồng Bộ Lịch Đặt</span>
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Tài khoản: {user.email}</span>
                 </div>
-                <h2 style={{ fontSize: '2rem', color: 'var(--primary-dark)' }}>
+                <h2 style={{ fontSize: '1.8rem', color: 'var(--primary-dark)' }}>
                   Lịch Hẹn Của Bệnh Nhân {user.name}
                 </h2>
               </>
             ) : (
-              <h2 style={{ fontSize: '2rem', color: 'var(--primary-dark)' }}>Tra Cứu Lịch Hẹn Khám Da Liễu</h2>
+              <h2 style={{ fontSize: '1.8rem', color: 'var(--primary-dark)' }}>Tra Cứu Lịch Hẹn Khám Da Liễu</h2>
             )}
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '4px' }}>
               Theo dõi tiến độ duyệt ca khám, khung giờ hẹn và ghi chú tư vấn của bác sĩ.
@@ -88,8 +88,8 @@ export const PatientDashboard = ({ onOpenBooking }) => {
         </div>
 
         {/* Search Bar */}
-        <form onSubmit={handleLookupSubmit} style={{ display: 'flex', gap: '12px', marginBottom: '32px', maxWidth: '540px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
+        <form onSubmit={handleLookupSubmit} style={{ display: 'flex', gap: '12px', marginBottom: '32px', maxWidth: '540px', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '220px', position: 'relative' }}>
             <input
               type="text"
               className="form-input"
@@ -110,15 +110,12 @@ export const PatientDashboard = ({ onOpenBooking }) => {
             {appointments.map((appt) => (
               <div
                 key={appt._id}
+                className="patient-card-grid"
                 style={{
                   background: 'var(--bg-cream)',
                   border: '1.5px solid var(--border-light)',
                   borderRadius: 'var(--radius-md)',
-                  padding: '24px',
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 2fr 1fr',
-                  gap: '20px',
-                  alignItems: 'center',
+                  padding: '20px',
                 }}
               >
                 {/* Col 1: Booking Code & Status */}

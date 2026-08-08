@@ -67,15 +67,15 @@ export const AdminDashboard = () => {
       : appointments.filter((a) => a.status === filterStatus);
 
   return (
-    <section className="container" style={{ padding: '60px 20px' }}>
-      <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '32px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
+    <section className="container" style={{ padding: '40px 16px' }}>
+      <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '24px 16px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
           <div>
             <span className="badge-emerald" style={{ marginBottom: '8px' }}>
               <ShieldCheck size={14} /> QUẢN TRỊ VIÊN DERMACARE
             </span>
-            <h2 style={{ fontSize: '2rem', color: 'var(--primary-dark)' }}>Dashboard Quản Lý Lịch Hẹn Khám</h2>
+            <h2 style={{ fontSize: '1.8rem', color: 'var(--primary-dark)' }}>Dashboard Quản Lý Lịch Hẹn Khám</h2>
           </div>
 
           <button className="btn-secondary" onClick={fetchAllAppointments}>
@@ -84,7 +84,7 @@ export const AdminDashboard = () => {
         </div>
 
         {/* Analytics Metric Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginBottom: '36px' }}>
+        <div className="admin-stats-grid" style={{ marginBottom: '36px' }}>
           <div style={{ background: 'var(--bg-cream)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
               <span>Tổng Đặt Lịch</span>
@@ -149,8 +149,8 @@ export const AdminDashboard = () => {
         {loading ? (
           <div style={{ textAlign: 'center', padding: '40px' }}>Đang tải danh sách đặt lịch...</div>
         ) : filteredList.length > 0 ? (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', minWidth: '680px', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
               <thead>
                 <tr style={{ background: 'var(--bg-cream)', borderBottom: '2px solid var(--border-light)' }}>
                   <th style={{ padding: '14px' }}>Mã & Bệnh Nhân</th>

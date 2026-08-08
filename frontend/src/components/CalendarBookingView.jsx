@@ -145,7 +145,7 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
   const todayStr = new Date().toISOString().split('T')[0];
 
   return (
-    <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '36px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
+    <div style={{ background: '#FFFFFF', borderRadius: 'var(--radius-lg)', padding: '24px 16px', boxShadow: 'var(--shadow-soft)', border: '1px solid var(--border-light)' }}>
       {bookingResult ? (
         /* Booking Confirmation Screen */
         <div style={{ textAlign: 'center', padding: '30px 10px' }}>
@@ -221,25 +221,25 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
       ) : (
         /* Main Interactive Schedule View */
         <div>
-          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
             <span className="badge-emerald" style={{ marginBottom: '8px' }}>
               <Sparkles size={14} /> BẢNG LỊCH ĐẶT KHÁM THEO GIỜ CHUYÊN KHOA
             </span>
-            <h2 style={{ fontSize: '2.2rem', color: 'var(--primary-dark)' }}>
+            <h2 className="doctor-header-title" style={{ fontSize: '1.8rem', color: 'var(--primary-dark)' }}>
               Lịch Làm Việc Chi Tiết BS. Đỗ Nguyễn Quỳnh Ngân
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginTop: '4px' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '4px' }}>
               Hệ thống quản lý khung giờ thông minh: tự động phân bổ ca rảnh & xử lý duyệt lịch công bằng.
             </p>
           </div>
 
           {/* Service Category Selection Tabs */}
-          <div style={{ background: 'var(--bg-cream)', padding: '20px', borderRadius: 'var(--radius-md)', marginBottom: '28px', border: '1.5px solid var(--border-light)' }}>
+          <div style={{ background: 'var(--bg-cream)', padding: '14px', borderRadius: 'var(--radius-md)', marginBottom: '24px', border: '1.5px solid var(--border-light)' }}>
             <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--primary-dark)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Clock size={18} color="var(--primary-emerald)" /> 1. Chọn Nhu Cầu / Loại Dịch Vụ Khám:
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px', marginBottom: '16px' }}>
+            <div className="service-type-grid" style={{ marginBottom: '16px' }}>
               <button
                 type="button"
                 onClick={() => { setServiceType('Làm da'); setSelectedSlot(''); setErrorMsg(''); }}
@@ -339,9 +339,9 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
             </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '36px', alignItems: 'start' }}>
+          <div className="calendar-responsive-grid">
             {/* Left Column: Interactive Month Calendar */}
-            <div style={{ background: 'var(--bg-cream)', padding: '24px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+            <div style={{ background: 'var(--bg-cream)', padding: '16px 12px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <button
                   className="btn-secondary"

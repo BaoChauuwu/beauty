@@ -588,14 +588,195 @@ button {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.doctor-header-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.doctor-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+/* Responsive Helper Classes */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+.calendar-responsive-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.patient-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.service-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 992px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
-  .hero-title {
-    font-size: 2.2rem;
+
+  .calendar-responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
+
   .nav-links {
-    display: none;
+    display: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  /* Doctor Header Card Mobile */
+  .doctor-header-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    text-align: center !important;
+    justify-items: center !important;
+    padding: 20px 14px !important;
+  }
+
+  .doctor-header-title {
+    font-size: 1.45rem !important;
+    text-align: center !important;
+  }
+
+  .doctor-schedule-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-img {
+    height: 280px;
+  }
+
+  .hero-floating-card {
+    padding: 14px;
+  }
+
+  .patient-card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-type-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .slot-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-md);
+    max-height: 92vh;
+    width: 96%;
+  }
+
+  .step-indicator::before {
+    top: 14px;
+  }
+
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .step-label {
+    font-size: 0.72rem;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.7rem;
+  }
+
+  .doctor-header-title {
+    font-size: 1.3rem !important;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-primary, .btn-secondary, .btn-gold {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .slot-btn {
+    padding: 8px 6px;
+    font-size: 0.82rem;
+  }
+}
+
+

@@ -32,7 +32,7 @@ export function AppContent() {
         onOpenAuth={() => setIsAuthOpen(true)}
       />
 
-      <main className="container" style={{ flex: 1, padding: '30px 20px 80px' }}>
+      <main className="container" style={{ flex: 1, padding: '20px 12px 60px', width: '100%', maxWidth: '100vw' }}>
         {activeTab === 'calendar' && (
           <>
             <DoctorHeaderCard doctor={doctor} />
