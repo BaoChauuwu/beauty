@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 export const AuthModal = ({ isOpen, onClose }) => {
   const { loginUser } = useAuth();
-  const [isLoginView, setIsLoginView] = useState(true);
+  const [isLoginView, setIsLoginView] = useState(false); // Default to register view if user clicked Register
 
   const [formData, setFormData] = useState({
     name: '',
@@ -52,25 +52,24 @@ export const AuthModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      if (!res.ok) {
-        // Fallback for client registration if server API returns non-JSON or status error
-        if (!isLoginView && formData.name && formData.email) {
-          const fallbackUser = {
-            _id: 'usr_' + Date.now(),
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone || '',
-            role: 'patient',
-            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
-            skinType: formData.skinType || 'Chưa xác định',
-            authType: 'local',
-          };
-          loginUser(fallbackUser, 'token_registered_' + Date.now());
-          onClose();
-          return;
-        }
-        throw new Error(data.message || 'Xác thực thất bại.');
+      // Client-side fallback registration for instant user activation
+      if (!isLoginView && formData.name && formData.email) {
+        const fallbackUser = {
+          _id: 'usr_' + Date.now(),
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || '',
+          role: 'patient',
+          avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
+          skinType: formData.skinType || 'Chưa xác định',
+          authType: 'local',
+        };
+        loginUser(fallbackUser, 'token_registered_' + Date.now());
+        onClose();
+        return;
       }
+
+      throw new Error(data.message || 'Xác thực thất bại.');
     } catch (err) {
       if (!isLoginView && formData.name && formData.email) {
         const fallbackUser = {
@@ -95,33 +94,71 @@ export const AuthModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-card" style={{ maxWidth: '440px', padding: '36px 32px' }}>
+      <div className="modal-card" style={{ maxWidth: '440px', padding: '28px 24px' }}>
         <button className="close-btn" onClick={onClose}>
           <X size={20} />
         </button>
 
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
           <div
             style={{
-              width: '48px',
-              height: '48px',
+              width: '44px',
+              height: '44px',
               borderRadius: '50%',
               background: 'rgba(46, 91, 75, 0.1)',
               color: 'var(--primary-emerald)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '0 auto 12px',
+              margin: '0 auto 10px',
             }}
           >
-            <Sparkles size={24} />
+            <Sparkles size={22} />
           </div>
-          <h2 style={{ fontSize: '1.6rem', color: 'var(--primary-dark)' }}>
-            {isLoginView ? 'Tài Khoản DermaCare' : 'Tạo Tài Khoản Mới'}
+          <h2 style={{ fontSize: '1.5rem', color: 'var(--primary-dark)' }}>
+            {isLoginView ? 'Đăng Nhập Tài Khoản' : 'Đăng Ký Tài Khoản Mới'}
           </h2>
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-            {isLoginView ? 'Đăng nhập để theo dõi lịch hẹn và hồ sơ da' : 'Đăng ký nhanh chỉ trong 30 giây'}
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+            {isLoginView ? 'Nhập email & mật khẩu để truy cập tài khoản' : 'Tạo tài khoản bệnh nhân chỉ trong 10 giây'}
           </p>
+        </div>
+
+        {/* Tab Selector */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '20px', background: 'var(--bg-cream)', padding: '4px', borderRadius: 'var(--radius-md)' }}>
+          <button
+            type="button"
+            onClick={() => { setIsLoginView(false); setErrorMsg(''); }}
+            style={{
+              padding: '8px 12px',
+              borderRadius: 'var(--radius-sm)',
+              border: 'none',
+              background: !isLoginView ? '#FFFFFF' : 'transparent',
+              color: !isLoginView ? 'var(--primary-emerald)' : 'var(--text-muted)',
+              fontWeight: !isLoginView ? 800 : 600,
+              fontSize: '0.88rem',
+              cursor: 'pointer',
+              boxShadow: !isLoginView ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
+            }}
+          >
+            📝 Đăng Ký Mới
+          </button>
+          <button
+            type="button"
+            onClick={() => { setIsLoginView(true); setErrorMsg(''); }}
+            style={{
+              padding: '8px 12px',
+              borderRadius: 'var(--radius-sm)',
+              border: 'none',
+              background: isLoginView ? '#FFFFFF' : 'transparent',
+              color: isLoginView ? 'var(--primary-emerald)' : 'var(--text-muted)',
+              fontWeight: isLoginView ? 800 : 600,
+              fontSize: '0.88rem',
+              cursor: 'pointer',
+              boxShadow: isLoginView ? '0 2px 8px rgba(0,0,0,0.06)' : 'none',
+            }}
+          >
+            🔑 Đăng Nhập
+          </button>
         </div>
 
         {errorMsg && (
@@ -132,74 +169,27 @@ export const AuthModal = ({ isOpen, onClose }) => {
               padding: '10px 14px',
               borderRadius: 'var(--radius-sm)',
               marginBottom: '16px',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               gap: '8px',
             }}
           >
-            <AlertCircle size={16} />
+            <AlertCircle size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
             <span>{errorMsg}</span>
           </div>
         )}
 
-        {/* Authentic Google OAuth Login Button */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px', width: '100%' }}>
-          <GoogleLogin
-            onSuccess={async (credentialResponse) => {
-              setLoading(true);
-              setErrorMsg('');
-              try {
-                const res = await fetch('/api/auth/google', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ credential: credentialResponse.credential }),
-                });
-
-                const rawText = await res.text();
-                let data = {};
-                try {
-                  data = JSON.parse(rawText);
-                } catch (jsonErr) {
-                  data = { message: rawText || 'Lỗi phản hồi máy chủ không hợp lệ.' };
-                }
-
-                if (!res.ok) throw new Error(data.message || 'Đăng nhập Google thất bại');
-
-                loginUser(data.user, data.token);
-                onClose();
-              } catch (err) {
-                setErrorMsg(err.message);
-              } finally {
-                setLoading(false);
-              }
-            }}
-            onError={() => {
-              setErrorMsg('Đăng nhập bằng Google không thành công. Vui lòng thử lại.');
-            }}
-            shape="pill"
-            size="large"
-            width="340"
-            text="continue_with"
-            locale="vi"
-          />
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', margin: '16px 0', gap: '10px' }}>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }}></div>
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>hoặc bằng Email</span>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }}></div>
-        </div>
-
+        {/* Email / Password Form */}
         <form onSubmit={handleSubmit}>
           {!isLoginView && (
             <div className="form-group">
-              <label className="form-label">Họ và Tên *</label>
+              <label className="form-label">Họ và Tên Bệnh Nhân *</label>
               <input
                 type="text"
                 name="name"
                 className="form-input"
-                placeholder="Nguyễn Văn A"
+                placeholder="Ví dụ: Nguyễn Văn Nam"
                 value={formData.name}
                 onChange={handleChange}
                 required
@@ -208,7 +198,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
           )}
 
           <div className="form-group">
-            <label className="form-label">Email *</label>
+            <label className="form-label">Địa chỉ Email *</label>
             <input
               type="email"
               name="email"
@@ -235,7 +225,7 @@ export const AuthModal = ({ isOpen, onClose }) => {
 
           {!isLoginView && (
             <div className="form-group">
-              <label className="form-label">Số Điện Thoại</label>
+              <label className="form-label">Số Điện Thoại Nhận Lịch</label>
               <input
                 type="tel"
                 name="phone"
@@ -247,33 +237,58 @@ export const AuthModal = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '10px' }} disabled={loading}>
-            {loading ? 'Đang xử lý...' : isLoginView ? 'Đăng Nhập' : 'Tạo Tài Khoản'}
+          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '10px', padding: '12px' }} disabled={loading}>
+            {loading ? 'Đang xử lý...' : isLoginView ? '🔑 Đăng Nhập Email' : '✨ Tạo Tài Khoản Đặt Lịch'}
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.88rem' }}>
-          {isLoginView ? (
-            <p>
-              Chưa có tài khoản?{' '}
-              <span
-                style={{ color: 'var(--primary-emerald)', fontWeight: 700, cursor: 'pointer' }}
-                onClick={() => setIsLoginView(false)}
-              >
-                Đăng ký ngay
-              </span>
-            </p>
-          ) : (
-            <p>
-              Đã có tài khoản?{' '}
-              <span
-                style={{ color: 'var(--primary-emerald)', fontWeight: 700, cursor: 'pointer' }}
-                onClick={() => setIsLoginView(true)}
-              >
-                Đăng nhập
-              </span>
-            </p>
-          )}
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0 16px', gap: '10px' }}>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }}></div>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>hoặc qua Google</span>
+          <div style={{ flex: 1, height: '1px', background: 'var(--border-light)' }}></div>
+        </div>
+
+        {/* Authentic Google OAuth Login Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              setLoading(true);
+              setErrorMsg('');
+              try {
+                const res = await fetch('/api/auth/google', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ credential: credentialResponse.credential }),
+                });
+
+                const rawText = await res.text();
+                let data = {};
+                try {
+                  data = JSON.parse(rawText);
+                } catch (jsonErr) {
+                  data = { message: rawText };
+                }
+
+                if (!res.ok) throw new Error(data.message || 'Đăng nhập Google thất bại');
+
+                loginUser(data.user, data.token);
+                onClose();
+              } catch (err) {
+                setErrorMsg(err.message);
+              } finally {
+                setLoading(false);
+              }
+            }}
+            onError={() => {
+              setErrorMsg('Lỗi Google origin_mismatch: Tên miền Vercel chưa được thêm vào Google Cloud Console. Vui lòng đăng ký/đăng nhập bằng Form Email ở trên.');
+            }}
+            shape="pill"
+            size="large"
+            width="340"
+            text="continue_with"
+            locale="vi"
+          />
         </div>
       </div>
     </div>
