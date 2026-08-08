@@ -54,12 +54,7 @@ const getDayOfWeek = (dateStr) => {
 };
 
 // Doctor's Hourly Schedule Matrix:
-// T7, CN (Sat/Sun):
-//   - Làm da: 08:00, 10:30, 14:00, 15:30, 17:30, 19:30
-//   - Khám mới: 10:00, 15:00, 17:00
-// T2 - T6 (Mon - Fri):
-//   - Làm da: 18:00
-//   - Tái khám: Sau 19h30 (19:30, 20:00, 20:30)
+// Flexible full-week schedule (Mon - Sun):
 const getScheduleForDateAndService = (dateStr, serviceType = '') => {
   const day = getDayOfWeek(dateStr);
   const isWeekend = (day === 0 || day === 6); // T7 (6) or CN (0)
@@ -67,33 +62,33 @@ const getScheduleForDateAndService = (dateStr, serviceType = '') => {
 
   if (normalized.includes('làm da') || normalized.includes('lam da') || normalized.includes('skin')) {
     if (isWeekend) {
-      return ['08:00', '10:30', '14:00', '15:30', '17:30', '19:30'];
+      return ['08:00', '09:30', '10:30', '14:00', '15:30', '17:30', '19:30'];
     } else {
-      return ['18:00'];
+      return ['08:30', '10:30', '14:00', '16:00', '18:00', '19:30'];
     }
   }
 
   if (normalized.includes('khám mới') || normalized.includes('kham moi') || normalized.includes('mới')) {
     if (isWeekend) {
-      return ['10:00', '15:00', '17:00'];
+      return ['09:00', '10:00', '11:00', '14:30', '15:00', '17:00'];
     } else {
-      return ['17:30', '18:30'];
+      return ['09:00', '10:30', '15:00', '17:30', '18:30'];
     }
   }
 
   if (normalized.includes('tái khám') || normalized.includes('tai kham') || normalized.includes('tái')) {
     if (!isWeekend) {
-      return ['19:30', '20:00', '20:30'];
+      return ['09:30', '11:00', '16:00', '18:30', '19:30', '20:00', '20:30'];
     } else {
-      return ['09:30', '11:30', '16:30'];
+      return ['09:30', '11:30', '16:30', '18:30'];
     }
   }
 
   // Default combined slots if no specific service selected
   if (isWeekend) {
-    return ['08:00', '10:00', '10:30', '14:00', '15:00', '15:30', '17:00', '17:30', '19:30'];
+    return ['08:00', '09:00', '10:00', '10:30', '14:00', '15:00', '15:30', '17:00', '17:30', '19:30'];
   } else {
-    return ['18:00', '19:30', '20:00', '20:30'];
+    return ['08:30', '10:30', '15:00', '17:30', '18:00', '19:30', '20:00'];
   }
 };
 

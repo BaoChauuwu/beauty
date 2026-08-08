@@ -258,7 +258,7 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
               >
                 <div>✨ Lịch Làm Da / Spa</div>
                 <div style={{ fontSize: '0.74rem', opacity: 0.9, marginTop: '2px', fontWeight: 400 }}>
-                  T7, CN: 8h, 10h30, 14h, 15h30, 17h30, 19h30 | T2-T6: 18h
+                  T2 - CN: 08:30 - 20:00 (Mở khám tất cả các ngày)
                 </div>
               </button>
 
@@ -280,7 +280,7 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
               >
                 <div>🩺 Lịch Khám Mới / Soi Da</div>
                 <div style={{ fontSize: '0.74rem', opacity: 0.9, marginTop: '2px', fontWeight: 400 }}>
-                  T7, CN: 10h, 15h, 17h | T2-T6: 17h30, 18h30
+                  T2 - CN: 09:00 - 18:30 (Khám trực tiếp với bác sĩ)
                 </div>
               </button>
 
@@ -302,17 +302,14 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
               >
                 <div>🔄 Lịch Tái Khám</div>
                 <div style={{ fontSize: '0.74rem', opacity: 0.9, marginTop: '2px', fontWeight: 400 }}>
-                  T2-T6: Sau 19h30 (19:30, 20:00, 20:30) | T7, CN: 9h30, 11h30, 16h30
+                  T2 - CN: Ca sáng, ca chiều & ca tối (đến 20:30)
                 </div>
               </button>
             </div>
 
             {/* Clear Rule Explanation Banner */}
             <div style={{ padding: '10px 14px', background: '#FFFFFF', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-              📌 <strong>Quy định khung giờ chuẩn dịch vụ [{serviceType}]:</strong>{' '}
-              {serviceType === 'Làm da' && 'Thứ 7 & Chủ Nhật có nhiều ca rảnh trong ngày (08:00 - 19:30). Từ Thứ 2 đến Thứ 6 bác sĩ ưu tiên nhận ca tối sau giờ làm (18:00).'}
-              {serviceType === 'Khám mới' && 'Thứ 7 & Chủ Nhật nhận ca sáng/chiều (10:00, 15:00, 17:00). Từ Thứ 2 đến Thứ 6 nhận ca 17:30 và 18:30.'}
-              {serviceType === 'Tái khám' && 'Từ Thứ 2 đến Thứ 6 nhận các ca tối muộn sau 19h30. Thứ 7 & Chủ Nhật nhận ca 09:30, 11:30, 16:30.'}
+              📌 <strong>Lịch mở khám chuẩn dịch vụ [{serviceType}]:</strong> Bác sĩ làm việc liên tục từ <strong>Thứ 2 đến Chủ Nhật</strong> (08:00 - 20:30). Bạn chỉ cần chọn ngày trên lịch và chọn khung giờ rảnh phù hợp!
             </div>
           </div>
 

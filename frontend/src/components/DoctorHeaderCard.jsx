@@ -65,28 +65,25 @@ export const DoctorHeaderCard = ({ doctor }) => {
         <div style={{ display: 'flex', gap: '16px', margin: '8px 0 14px', flexWrap: 'wrap', fontSize: '0.88rem', color: 'var(--primary-emerald)', fontWeight: 700, justifyContent: 'inherit' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <Phone size={15} color="var(--primary-emerald)" />
-            <span>Hotline / Zalo: {doctorPhone}</span>
+            <span>Hotline / Zalo Đặt Khám: {doctorPhone}</span>
           </div>
         </div>
 
-        {/* Structured Schedule Notice */}
-        <div style={{ background: 'rgba(31, 77, 62, 0.04)', padding: '12px 14px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(31, 77, 62, 0.12)', textAlign: 'left' }}>
-          <div style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--primary-dark)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Calendar size={14} color="var(--primary-emerald)" /> LỊCH BÁC SĨ NGAN MỞ KHÁM THEO CA GIỜ:
+        {/* Structured Full-Week Schedule Notice */}
+        <div style={{ background: 'rgba(31, 77, 62, 0.04)', padding: '14px 16px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(31, 77, 62, 0.12)', textAlign: 'left' }}>
+          <div style={{ fontSize: '0.84rem', fontWeight: 800, color: 'var(--primary-dark)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Calendar size={15} color="var(--primary-emerald)" /> BẢNG LỊCH BÁC SĨ MỞ KHÁM CẢ TUẦN (T2 - CN):
           </div>
 
           <div className="doctor-schedule-grid" style={{ fontSize: '0.8rem' }}>
             <div style={{ background: '#FFFFFF', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)' }}>
-              ✨ <strong>Làm Da (T7, CN):</strong> 8h, 10h30, 14h, 15h30, 17h30, 19h30
+              ✨ <strong>Làm Da / Spa:</strong> T2 - CN (Sáng 8h30-11h | Chiều/Tối 14h-20h)
             </div>
             <div style={{ background: '#FFFFFF', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)' }}>
-              ✨ <strong>Làm Da (T2 - T6):</strong> 18h
+              🩺 <strong>Khám Mới / Soi Da:</strong> T2 - CN (Sáng 9h-11h | Chiều 14h30-18h30)
             </div>
             <div style={{ background: '#FFFFFF', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)' }}>
-              🩺 <strong>Khám Mới (T7, CN):</strong> 10h, 15h, 17h
-            </div>
-            <div style={{ background: '#FFFFFF', padding: '8px 10px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-light)' }}>
-              🔄 <strong>Tái Khám (T2 - T6):</strong> Sau 19h30 (19:30, 20:00...)
+              🔄 <strong>Tái Khám Da Liễu:</strong> T2 - CN (Ca sáng/chiều & ca tối muộn đến 20:30)
             </div>
           </div>
         </div>
