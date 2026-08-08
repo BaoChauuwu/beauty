@@ -163,7 +163,7 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
                       position: 'absolute',
                       top: '46px',
                       right: 0,
-                      width: '200px',
+                      width: '210px',
                       background: '#FFFFFF',
                       borderRadius: 'var(--radius-md)',
                       padding: '12px',
@@ -209,9 +209,9 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
                         width: '100%',
                         textAlign: 'left',
                         padding: '8px 10px',
-                        background: 'none',
+                        background: '#fee2e2',
                         border: 'none',
-                        color: '#DC2626',
+                        color: '#991b1b',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '8px',
@@ -219,10 +219,10 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
                         fontSize: '0.82rem',
                         fontWeight: 700,
                         cursor: 'pointer',
-                        marginTop: '4px',
+                        marginTop: '6px',
                       }}
                     >
-                      <LogOut size={14} /> Đăng xuất
+                      <LogOut size={14} /> Đăng Xuất Tài Khoản
                     </button>
                   </div>
                 )}
@@ -333,7 +333,44 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
                 </button>
               )}
 
-              {!user && (
+              {user ? (
+                <div style={{ padding: '10px 12px', background: 'var(--bg-cream)', borderRadius: 'var(--radius-md)', marginTop: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1.5px solid var(--primary-emerald)' }}
+                    />
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '0.88rem', color: 'var(--primary-dark)' }}>{user.name}</div>
+                      <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>{user.email}</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      logoutUser();
+                      setMobileMenuOpen(false);
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      background: '#fee2e2',
+                      color: '#991b1b',
+                      border: 'none',
+                      borderRadius: 'var(--radius-sm)',
+                      fontWeight: 700,
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <LogOut size={16} /> Đăng Xuất Tài Khoản
+                  </button>
+                </div>
+              ) : (
                 <button
                   className="btn-gold"
                   onClick={() => {
@@ -347,7 +384,7 @@ export const Navbar = ({ onOpenAuth, onNavigate, activeTab }) => {
                     padding: '10px',
                   }}
                 >
-                  <User size={16} /> Đăng Nhập
+                  <User size={16} /> Đăng Nhập / Đăng Ký
                 </button>
               )}
             </div>
