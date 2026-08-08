@@ -221,16 +221,13 @@ export const CalendarBookingView = ({ doctor, onBookingSuccess, onOpenAuth }) =>
       ) : (
         /* Main Interactive Schedule View */
         <div>
-          <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-            <span className="badge-emerald" style={{ marginBottom: '8px' }}>
-              <Sparkles size={14} /> BẢNG LỊCH ĐẶT KHÁM THEO GIỜ CHUYÊN KHOA
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+            <span className="badge-emerald" style={{ marginBottom: '6px' }}>
+              <Sparkles size={14} /> DERMACARE - ĐẶT LỊCH KHÁM ONLINE
             </span>
-            <h2 className="doctor-header-title" style={{ fontSize: '1.8rem', color: 'var(--primary-dark)' }}>
-              Lịch Làm Việc Chi Tiết BS. Đỗ Nguyễn Quỳnh Ngân
+            <h2 className="doctor-header-title" style={{ fontSize: '1.7rem', color: 'var(--primary-dark)' }}>
+              Lịch Khám BS. Đỗ Nguyễn Quỳnh Ngân
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '4px' }}>
-              Hệ thống quản lý khung giờ thông minh: tự động phân bổ ca rảnh & xử lý duyệt lịch công bằng.
-            </p>
           </div>
 
           {/* Service Category Selection Tabs */}
